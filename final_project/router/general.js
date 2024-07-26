@@ -27,9 +27,28 @@ return res.status(404).json({message: "Unable to register user."});
 
 
 // Get the book list available in the shop
-public_users.get('/',function (req, res) {
+public_users.get('/', (req, res) => {
   //Write your code here
- res.send(JSON.stringify(books, null, 4));
+  
+let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 1 resolved")
+    },6000)})
+
+let myPromise2 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 2 resolved")
+    },3000)})
+
+  myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+  })
+
+  myPromise2.then((successMessage) => {
+  console.log("From Callback " + successMessage)
+})
+
+res.send(JSON.stringify(books,null,4));
 });
 
 // Get book details based on ISBN
@@ -37,6 +56,24 @@ public_users.get('/isbn/:isbn',function (req,
     res) {
   //Write your code here
   const isbn = req.params.isbn;
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 1 resolved")
+    },6000)})
+
+let myPromise2 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 2 resolved")
+    },3000)})
+
+  myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+  })
+
+  myPromise2.then((successMessage) => {
+  console.log("From Callback " + successMessage)
+})
+
   res.send(books[isbn]);
 });
   
@@ -47,12 +84,28 @@ public_users.get('/author/:author',function (req, res) {
   const bookKeys = Object.keys(books);
   const matchingBooks = [];
 
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 1 resolved")
+    },6000)})
+
+let myPromise2 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 2 resolved")
+    },3000)})
+
+  myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+  })
+
+  myPromise2.then((successMessage) => {
+  console.log("From Callback " + successMessage)
+})
   for (const key of bookKeys) {
     if (books[key].author.toLowerCase() === author.toLowerCase()) {
       matchingBooks.push(books[key]);
     }
   }
-
   if (matchingBooks.length > 0) {
     res.json(matchingBooks);
   } else {
@@ -67,12 +120,26 @@ public_users.get('/title/:title',function (req, res) {
   const bookKeys = Object.keys(books);
   const matchingBooks = [];
 
+let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 1 resolved")
+    },6000)})
+let myPromise2 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve("Promise 2 resolved")
+    },3000)})
+
+  myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+  })
+  myPromise2.then((successMessage) => {
+  console.log("From Callback " + successMessage)
+})
   for (const key of bookKeys) {
     if (books[key].title.toLowerCase() === title.toLowerCase()) {
       matchingBooks.push(books[key]);
     }
   }
-
   if (matchingBooks.length > 0) {
     res.json(matchingBooks);
   } else {
